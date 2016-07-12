@@ -1,0 +1,1 @@
+./vendor/bin/doctrine orm:convert-mapping -f   --from-database   --namespace doctrine\\abc\\Entities\\  yaml ./config/yaml/dcm/
