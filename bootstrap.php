@@ -6,19 +6,25 @@ require_once "vendor/autoload.php";
 // 开发模式开关
 $isDevMode = true;
 
-//Annotation 配置格式
-//$config = Setup::createAnnotationMetadataConfiguration(array(__DIR__."/src"), $isDevMode);
+//自定义数据实体描述文件存放目录
+$metadataDir = __DIR__ . "/config/yaml/dcm";
+if (!file_exists($metadataDir)) {
+    mkdir($metadataDir);
+}
 
-// XML 配置格式
-//$config = Setup::createXMLMetadataConfiguration(array(__DIR__."/config/xml"), $isDevMode);
+//Annotation 配置格式
+//$config = Setup::createAnnotationMetadataConfiguration(array($metadataDir), $isDevMode);
+
+//XML 配置格式
+//$config = Setup::createXMLMetadataConfiguration(array($metadataDir), $isDevMode);
 
 //YAML 配置格式
-$config = Setup::createYAMLMetadataConfiguration(array(__DIR__ . "/config/yaml/dcm/blog"), $isDevMode); //yaml
+$config = Setup::createYAMLMetadataConfiguration(array($metadataDir), $isDevMode); //yaml
 
 //MySQL数据库配置（pdo_mysql)
 $conn = array(
     'driver' => 'pdo_mysql',
-    'host' => '192.168.33.100',
+    'host' => 'mysql.host',   //host解析到指定mysql服务器IP
     'dbname' => 'doctrine_abc',
     'user' => 'root',
     'password' => '123456'
